@@ -1,0 +1,130 @@
+### Tạo tin tức mới
+POST http://localhost:8080/api/news
+Content-Type: application/json
+
+{
+  "title": "Tin tức về công nghệ AI mới nhất",
+  "content": "Trí tuệ nhân tạo (AI) đang thay đổi cách chúng ta làm việc và sống. Machine learning và deep learning là những công nghệ đột phá...",
+  "author": "Nguyễn Văn A",
+  "category": "Technology",
+  "tags": "AI, Machine Learning, Technology",
+  "publishedDate": "2026-01-05T10:00:00"
+}
+
+###
+
+### Tạo tin tức về thể thao
+POST http://localhost:8080/api/news
+Content-Type: application/json
+
+{
+  "title": "Kết quả bóng đá hôm nay",
+  "content": "Trận đấu giữa hai đội bóng hàng đầu đã diễn ra vô cùng hấp dẫn...",
+  "author": "Trần Văn B",
+  "category": "Sports",
+  "tags": "Football, Sports",
+  "publishedDate": "2026-01-05T14:00:00"
+}
+
+###
+
+### Lấy tất cả tin tức
+GET http://localhost:8080/api/news
+
+###
+
+### Lấy tin tức theo ID
+GET http://localhost:8080/api/news/1
+
+###
+
+### Tìm kiếm theo keyword
+POST http://localhost:8080/api/news/search
+Content-Type: application/json
+
+{
+  "keyword": "AI",
+  "page": 0,
+  "size": 10
+}
+
+###
+
+### Tìm kiếm và lọc theo category
+POST http://localhost:8080/api/news/search
+Content-Type: application/json
+
+{
+  "keyword": "công nghệ",
+  "category": "Technology",
+  "page": 0,
+  "size": 10
+}
+
+###
+
+### Lọc theo author
+POST http://localhost:8080/api/news/search
+Content-Type: application/json
+
+{
+  "author": "Nguyễn Văn A",
+  "page": 0,
+  "size": 10
+}
+
+###
+
+### Lọc theo khoảng thời gian
+POST http://localhost:8080/api/news/search
+Content-Type: application/json
+
+{
+  "startDate": "2026-01-01T00:00:00",
+  "endDate": "2026-01-31T23:59:59",
+  "page": 0,
+  "size": 10
+}
+
+###
+
+### Tìm kiếm kết hợp nhiều filter
+POST http://localhost:8080/api/news/search
+Content-Type: application/json
+
+{
+  "keyword": "AI",
+  "category": "Technology",
+  "author": "Nguyễn Văn A",
+  "startDate": "2026-01-01T00:00:00",
+  "endDate": "2026-12-31T23:59:59",
+  "page": 0,
+  "size": 10
+}
+
+###
+
+### Cập nhật tin tức
+PUT http://localhost:8080/api/news/1
+Content-Type: application/json
+
+{
+  "title": "Tin tức về AI - Cập nhật",
+  "content": "Nội dung đã được cập nhật...",
+  "author": "Nguyễn Văn A",
+  "category": "Technology",
+  "tags": "AI, Updated",
+  "publishedDate": "2026-01-05T15:00:00"
+}
+
+###
+
+### Xóa tin tức
+DELETE http://localhost:8080/api/news/1
+
+###
+
+### Đồng bộ dữ liệu MySQL -> Elasticsearch
+POST http://localhost:8080/api/news/sync
+
+###
