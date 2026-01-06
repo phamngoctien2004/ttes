@@ -27,3 +27,16 @@ logging:
   level:
     "[com.demo]": DEBUG
     "[org.springframework.data.elasticsearch]": DEBUG
+
+# MinIO Configuration
+minio:
+  endpoint: http://localhost:9000
+  access-key: minioadmin
+  secret-key: minioadmin
+  bucket-name: private-media
+  presign-expiry: 3600 # seconds
+
+# JWT Configuration
+jwt:
+  secret: mySecretKeyForJWTTokenGenerationMustBeLongEnough123456789
+  expiration: 86400000 # 24 hours in milliseconds

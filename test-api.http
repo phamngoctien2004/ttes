@@ -128,3 +128,76 @@ DELETE http://localhost:8080/api/news/1
 POST http://localhost:8080/api/news/sync
 
 ###
+
+#############################################
+# AUTH & USER APIS
+#############################################
+
+### Đăng ký tài khoản mới
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "password": "password123",
+  "email": "testuser@example.com"
+}
+
+###
+
+### Đăng nhập
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "password": "password123"
+}
+
+###
+
+### Lấy thông tin user hiện tại (cần token)
+# Thay <TOKEN> bằng token nhận được khi đăng nhập
+GET http://localhost:8080/api/users/me
+Authorization: Bearer <TOKEN>
+
+###
+
+#############################################
+# FILE UPLOAD APIS (sử dụng Presigned URL)
+#############################################
+
+### Lấy presigned URL để upload avatar
+# Thay <TOKEN> bằng token nhận được khi đăng nhập
+POST http://localhost:8080/api/users/me/avatar/upload-url?fileName=avatar.jpg&contentType=image/jpeg
+Authorization: Bearer <TOKEN>
+
+###
+
+### Lấy presigned URL để upload file bất kỳ
+# Thay <TOKEN> bằng token nhận được khi đăng nhập
+POST http://localhost:8080/api/files/upload-url?fileName=document.pdf&contentType=application/pdf
+Authorization: Bearer <TOKEN>
+
+###
+
+### Lấy presigned URL để xem file
+# Thay <TOKEN> và <OBJECT_KEY> bằng giá trị thực
+GET http://localhost:8080/api/files/view-url?objectKey=<OBJECT_KEY>
+Authorization: Bearer <TOKEN>
+
+###
+
+#############################################
+# HƯỚNG DẪN SỬ DỤNG PRESIGNED URL
+#############################################
+# 
+# 1. Gọi API upload-url để lấy presigned URL
+# 2. Sử dụng URL đó để upload file trực tiếp lên MinIO:
+#    curl -X PUT "<presigned-url>" -H "Content-Type: image/jpeg" --data-binary @avatar.jpg
+#
+# 3. Khi cần xem file, gọi API view-url hoặc API /users/me
+#    để lấy presigned URL và mở trong browser
+#
+#############################################
+
